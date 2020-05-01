@@ -1,0 +1,41 @@
+﻿@model SongsDomain.SongForPlaylist
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SongForPlaylist</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="SongDetailsId" class="control-label"></label>
+                <select asp-for="SongDetailsId" class="form-control" asp-items="ViewBag.SongDetailsId"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PlaylistId" class="control-label"></label>
+                <select asp-for="PlaylistId" class="form-control" asp-items="ViewBag.PlaylistId"></select>
+            </div>
+
+            @if (null != TempData["alertMessage"])
+            {
+                <h5 style="color:red"> That song is already in that playlist </h5>
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

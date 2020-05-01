@@ -1,0 +1,52 @@
+﻿@model SongSystem.Models.SongIndexVm;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Song list</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>(Id) Title</th>
+            <th>Artist name</th>
+            <th>Length (sec) </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+       @foreach (var item in Model.songs)
+        {
+         <tr>
+            <td>
+            @Html.Encode($"({item.Id})")    @Html.DisplayFor(modelItem => item.Title )
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtistName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Length)
+            </td>
+
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    body{
+
+    }
+</style>

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SongSystem", "SongSystem\SongSystem.csproj", "{9CE7D783-3CE2-4D9B-AD50-7241BE3534CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SongsDomain", "SongsDomain\SongsDomain.csproj", "{A698477B-8C58-43FB-9709-32B2E85B8BFB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SongsInfrasctructure", "SongsInfrasctructure\SongsInfrasctructure.csproj", "{0F004DBD-E03B-4181-902C-083A92A60F0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SongsApplication", "SongsApplication\SongsApplication.csproj", "{9B5BB50D-25BC-494C-828D-19FEFB2946BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaylistLength", "PlaylistLength\PlaylistLength.csproj", "{346AA4F6-5074-4DCE-95D9-5A6880E6F403}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongTesting", "SongTesting\SongTesting.csproj", "{2E7424EE-B5FE-470E-B398-9A5B10C8C6A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9CE7D783-3CE2-4D9B-AD50-7241BE3534CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE7D783-3CE2-4D9B-AD50-7241BE3534CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE7D783-3CE2-4D9B-AD50-7241BE3534CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE7D783-3CE2-4D9B-AD50-7241BE3534CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A698477B-8C58-43FB-9709-32B2E85B8BFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A698477B-8C58-43FB-9709-32B2E85B8BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A698477B-8C58-43FB-9709-32B2E85B8BFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A698477B-8C58-43FB-9709-32B2E85B8BFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F004DBD-E03B-4181-902C-083A92A60F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F004DBD-E03B-4181-902C-083A92A60F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F004DBD-E03B-4181-902C-083A92A60F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F004DBD-E03B-4181-902C-083A92A60F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B5BB50D-25BC-494C-828D-19FEFB2946BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B5BB50D-25BC-494C-828D-19FEFB2946BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B5BB50D-25BC-494C-828D-19FEFB2946BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B5BB50D-25BC-494C-828D-19FEFB2946BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{346AA4F6-5074-4DCE-95D9-5A6880E6F403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{346AA4F6-5074-4DCE-95D9-5A6880E6F403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{346AA4F6-5074-4DCE-95D9-5A6880E6F403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{346AA4F6-5074-4DCE-95D9-5A6880E6F403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E7424EE-B5FE-470E-B398-9A5B10C8C6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E7424EE-B5FE-470E-B398-9A5B10C8C6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E7424EE-B5FE-470E-B398-9A5B10C8C6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E7424EE-B5FE-470E-B398-9A5B10C8C6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {20CE9A13-7510-4AA7-AD54-F67631DC8798}
+	EndGlobalSection
+EndGlobal

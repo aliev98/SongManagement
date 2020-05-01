@@ -1,0 +1,47 @@
+﻿@model SongSystem.Models.PlaylistIndexVm;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1> Playlists</h1>
+
+<p>
+    <a asp-action="Create">New playlist</a>
+</p>
+
+<table class="table">
+
+    <thead style="background-color:lightblue">
+        <tr>
+            <th>(Id) Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody style="background-color:aliceblue">
+
+        @foreach (var item in Model.playlists)
+         {
+            <tr>
+                <td>
+                  @Html.Encode($"({item.Id})")  @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                    <a asp-action="viewSongs" asp-route-id="@item.Id">View songs</a> |
+                </td>
+            </tr>
+         }
+    </tbody>
+</table>
+
+<style > </style>

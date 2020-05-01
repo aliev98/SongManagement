@@ -1,0 +1,76 @@
+﻿@model SongSystem.Models.SongsPlaylistsVm;
+
+@{
+    ViewData["Title"] = "ViewSongs";
+
+
+     @if(Model.songsforplaylists.Count() == 0)
+     {
+        <script>
+            alert("This playlist has no songs")
+            javascript:history.go(-1)
+        </script>
+     }
+
+}
+
+<h1> Songs from @foreach (var item in Model.songsforplaylists) { @Html.DisplayFor(modelItem => item.Playlist.Name) break; } </h1>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Artist name</th>
+            <th>Length</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+       @foreach (var item in Model.songsforplaylists)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SongDetails.Title)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SongDetails.ArtistName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SongDetails.Length)
+            </td>
+
+            <td>
+            @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+            <a asp-action="viewSongs" asp-route-id="@item.Id">View songs</a> |*@
+        </td>
+        </tr>
+        }
+
+        <a asp-action="Index">Back</a>
+
+    </tbody>
+</table>
+
+@if(TempData["message"] != null)
+{
+    <script>alert("This playlist has no songs")</script>
+}
+
+<style>
+    body {
+    }
+</style>
+
