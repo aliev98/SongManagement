@@ -10,6 +10,10 @@ namespace SongSystem.Data
 {
     public class SongSystemContext : DbContext
     {
+        public SongSystemContext()
+        {
+
+        }
         public SongSystemContext (DbContextOptions<SongSystemContext> options) : base(options)
         {
 
