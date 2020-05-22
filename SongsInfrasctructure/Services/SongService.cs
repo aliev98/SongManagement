@@ -21,7 +21,7 @@ namespace SongsInfrasctructure.Services
 
         public void removeASong()
         {
-            var aSong = _context.Songs.Where(x => x.Length == 10).FirstOrDefault();
+            var aSong = _context.Songs.Where (x => x.Id == 2).FirstOrDefault();
 
             this._context.Remove(aSong);
 
@@ -32,7 +32,7 @@ namespace SongsInfrasctructure.Services
         public void addSong (SongDetails aSong)
         {
             this._context.Add(aSong);
-            _context.SaveChanges();
+                _context.SaveChanges();
         }
 
         public ICollection <SongDetails> GetAllSongs()

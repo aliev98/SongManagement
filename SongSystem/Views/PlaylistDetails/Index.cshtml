@@ -12,7 +12,7 @@
 
 <table class="table">
 
-    <thead style="background-color:lightblue">
+    <thead style="background-color:aliceblue">
         <tr>
             <th>(Id) Name</th>
             <th>Description</th>
@@ -20,7 +20,7 @@
         </tr>
     </thead>
 
-    <tbody style="background-color:aliceblue">
+    <tbody>
 
         @foreach (var item in Model.playlists)
          {
@@ -34,6 +34,7 @@
                 </td>
 
                 <td>
+                    <a asp-action="newOrnot" asp-route-id="@item.Id" > Add a song </a> |
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |

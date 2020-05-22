@@ -9,6 +9,7 @@ using SongSystem.Data;
 using SongsDomain;
 using SongSystem.Models;
 using SongsApplication.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace SongSystem.Controllers
 {
@@ -18,27 +19,21 @@ namespace SongSystem.Controllers
         private readonly IPlaylistService playlistService;
         private readonly ISongService songService;
         private readonly ISongPlayService songplayservice;
-       
 
-        public PlaylistDetailsController (SongSystemContext context, IPlaylistService playlistservice, ISongService Songservice, ISongPlayService songplayService)
+        public PlaylistDetailsController(SongSystemContext context, IPlaylistService playlistservice, ISongService Songservice, ISongPlayService songplayService)
         {
             songplayservice = songplayService;
             playlistService = playlistservice;
             songService = Songservice;
             _context = context;
         }
-
     
         // GET: PlaylistDetails
         public IActionResult Index()
         {
             var vm = new PlaylistIndexVm();
-
             vm.playlists = playlistService.GetAllPlaylists();
-
             return View(vm);
-
-            
 
             //return View(await _context.Playlists.ToListAsync());
         }
@@ -58,22 +53,55 @@ namespace SongSystem.Controllers
 
         public IActionResult viewSongs (int? id)
         {
-
             //    var playlist = playlistService.GetPlaylist((int)id);
  
             var vm = new SongsPlaylistsVm();
 
             //    vm.songsforplaylists= playlistService.theSongs((int)id);
 
-
             vm.songsforplaylists = _context.songForPlaylists.Include (x => x.SongDetails).Include(x => x.Playlist).Where(x => x.PlaylistId == id).ToList();
 
            
-
             //playlist.SongList = new List<SongDetails>();
 
             return View(vm);
         }
+
+        public IActionResult newOrnot (int Id)
+        {
+            var playlist = playlistService.GetPlaylist (Id);
+            
+            ViewBag.message = playlist.Name;
+            ViewBag.theId = playlist.Id;
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult newSong ()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task <IActionResult> newSong (SongDetails aSong)
+        {
+            if (ModelState.IsValid)
+            {
+                var thesong = aSong;
+
+                songService.addSong(thesong);
+
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(aSong);
+        }
+
+
+
 
         // GET: PlaylistDetails/Details/5
         public async Task <IActionResult> Details (int? id)
@@ -105,7 +133,7 @@ namespace SongSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create (PlaylistCreateVm vm)
+        public async Task <IActionResult> Create (PlaylistCreateVm vm)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +146,7 @@ namespace SongSystem.Controllers
                 newList.Description = vm.Description;
 
                 //newList.SongList = new List <SongDetails>();
-                
+
                 playlistService.addPlaylist(newList);
 
 
@@ -127,11 +155,11 @@ namespace SongSystem.Controllers
 
             return RedirectToAction("Error", "Home", "");
 
-         //   return View(playlistDetails);
+            //   return View(playlistDetails);
         }
 
         // GET: PlaylistDetails/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task <IActionResult> Edit (int? id)
         {
             if (id == null)
             {
@@ -139,11 +167,13 @@ namespace SongSystem.Controllers
             }
 
             var playlistDetails = await _context.Playlists.FindAsync(id);
+            
             if (playlistDetails == null)
             {
                 return NotFound();
             }
-            return View(playlistDetails);
+
+            return View (playlistDetails);
         }
 
         // POST: PlaylistDetails/Edit/5
@@ -151,7 +181,7 @@ namespace SongSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] PlaylistDetails playlistDetails)
+        public async Task<IActionResult> Edit (int id, [Bind("Id,Name,Description")] PlaylistDetails playlistDetails)
         {
             if (id != playlistDetails.Id)
             {
@@ -165,24 +195,28 @@ namespace SongSystem.Controllers
                     _context.Update(playlistDetails);
                     await _context.SaveChangesAsync();
                 }
+
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!PlaylistDetailsExists(playlistDetails.Id))
                     {
                         return NotFound();
                     }
+
                     else
                     {
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(playlistDetails);
         }
 
         // GET: PlaylistDetails/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task <IActionResult> Delete (int? id)
         {
             if (id == null)
             {

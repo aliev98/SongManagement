@@ -12,20 +12,18 @@ namespace SongSystem.Data
     {
         public SongSystemContext()
         {
-
+            
         }
-        public SongSystemContext (DbContextOptions<SongSystemContext> options) : base(options)
+
+        public SongSystemContext (DbContextOptions <SongSystemContext> options) : base(options)
         {
 
         }
 
         public DbSet <SongDetails> Songs { get; set; }
-        
         public DbSet <PlaylistDetails> Playlists { get; set; }
-
         public DbSet <SongForPlaylist> songForPlaylists { get; set; }
 
-        
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {
             ConfigureSongDetails(modelBuilder);
@@ -33,7 +31,6 @@ namespace SongSystem.Data
             SeedDatabase(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
-
         }
 
         private static void SeedDatabase (ModelBuilder modelBuilder)
@@ -46,7 +43,6 @@ namespace SongSystem.Data
                 new SongForPlaylist { Id = 4, SongDetailsId = 6, PlaylistId = 2 },
                 new SongForPlaylist { Id = 5, SongDetailsId = 7, PlaylistId = 2 }
         );
-
             modelBuilder.Entity<SongDetails>().HasData(
                         new SongDetails { Id = 1, Title = "Without you", ArtistName = "Avicii", Length = 10 },
                         new SongDetails { Id = 2, Title = "The nights", ArtistName = "Avicii", Length = 15 },
@@ -55,6 +51,7 @@ namespace SongSystem.Data
                         new SongDetails { Id = 5, Title = "Lose Yourself", ArtistName = "Eminem", Length = 19 },
                         new SongDetails { Id = 6, Title = "The Bones", ArtistName = "Marren Morris", Length = 25 },
                         new SongDetails { Id = 7, Title = "Forever And Ever", ArtistName = "Randy Travis", Length = 20 }
+                       
                );
 
             modelBuilder.Entity<PlaylistDetails>().HasData(
@@ -73,12 +70,17 @@ namespace SongSystem.Data
             //optionsBuilder.UseSqlServer(
             //    Configuration.GetConnectionString("SongsInfrastructure"));
             //base.OnConfiguring(optionsBuilder);
+
+
         }
 
 
         private static void ConfigureSongDetails (ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SongDetails>().HasKey(x => x.Id);
+
+            modelBuilder.Entity<SongDetails>()
+                .Property(p => p.Id).ValueGeneratedOnAdd();
 
             //modelBuilder.Entity<SongDetails>()
             //    .HasOne(b => b.Title);

@@ -9,7 +9,6 @@ using SongsDomain;
 using SongsInfrasctructure;
 using SongSystem;
 using SongSystem.Data;
-using SongsInfrasctructure.Helper;
 using Microsoft.EntityFrameworkCore;
 using SongsInfrasctructure.Services;
 
@@ -21,17 +20,59 @@ namespace PlaylistLength
          static void Main (string[] args)
          {
             var context = new ConsoleContext();
+
             IPlaylistService playlistService = new PlaylistService(context);
+            ISongService songservice = new SongService(context);
+            ISongPlayService songplayservice = new SongPlayService(context);
+
             var allPlayLists = playlistService.GetAllPlaylists();
+            var allsongs = songservice.GetAllSongs();
+            var allplaysongs = songplayservice.GetList();
+
+            var nameandlengthlist = new List <playlistsnameandLength>();
+
+            foreach (var item in allPlayLists)
+            {
+                var namelength = new playlistsnameandLength();
+
+                var length = 0;
+                var nameofplaylist = item.Name;
+
+                foreach (var songplay in allplaysongs)
+                {
+                    if (item.Id == songplay.PlaylistId)
+                    {
+                        length += songplay.SongDetails.Length;
+                    }
+                }
+
+                namelength.Name = nameofplaylist;
+                namelength.Length = length;
+
+                nameandlengthlist.Add (namelength);
+
+            }
+
+            foreach (var item in nameandlengthlist)
+            {
+                Console.WriteLine($"{item.Name} has length {item.Length}");
+            }
+
             //Perform logic
-            Console.WriteLine("Hello World");
+
             Console.ReadLine();
          }
     }
 
-    public class ConsoleContext: SongSystemContext
+    public class playlistsnameandLength
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public string Name { get; set; }
+        public int Length { get; set; }
+    }
+
+    public class ConsoleContext : SongSystemContext
+    {
+        protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SongSystemContext-4e702422-1bb2-41d3-a0ca-1142dad41803;Trusted_Connection=True;MultipleActiveResultSets=true");
         }

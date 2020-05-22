@@ -12,14 +12,14 @@ namespace SongSystem.Models
     {
         //public SongDetails SongDetails { get; set; }
 
-        [Display(Name = "Which song?")]
+        [Display(Name = "Song")]
         public SelectList SongSelectlist { get; set; }
         public int SongDetailsId { get; set; }
 
 
         //public PlaylistDetails Playlist { get; set; }
 
-        [Display(Name ="To which playlist?")]
+        [Display(Name =" Into which playlist?")]
         public SelectList PlayListSelectlist { get; set; }
         public int PlaylistId { get; set; }
     }

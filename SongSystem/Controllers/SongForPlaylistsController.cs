@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SongSystem.Data;
 using SongsDomain;
 using SongsApplication.Interfaces;
+using SongSystem.Models;
 
 namespace SongSystem.Controllers
 {
@@ -16,11 +17,13 @@ namespace SongSystem.Controllers
         private readonly SongSystemContext _context;
         private readonly ISongPlayService songplayservice;
         private readonly ISongService songservice;
-        
-        public SongForPlaylistsController(SongSystemContext context, ISongPlayService Songplayservice)
+        private readonly IPlaylistService playlistservice;
+     
+        public SongForPlaylistsController(SongSystemContext context, ISongPlayService Songplayservice, IPlaylistService Playlistservice)
         {
             _context = context;
             this.songplayservice = Songplayservice;
+            this.playlistservice = Playlistservice;
         }
 
         // GET: SongForPlaylists
@@ -55,6 +58,11 @@ namespace SongSystem.Controllers
         // GET: SongForPlaylists/Create
         public IActionResult Create()
         {
+            //var vm = new SongInPlayCreateVm();
+
+            //vm.PlayListSelectlist = new SelectList (_context.Playlists, "Id", "Name");
+            //vm.SongSelectlist = new SelectList (_context.Songs, "Id", "Title");
+
             ViewData["PlaylistId"] = new SelectList (_context.Playlists, "Id", "Name");
             ViewData["SongDetailsId"] = new SelectList (_context.Songs, "Id", "Title");
 
@@ -66,21 +74,21 @@ namespace SongSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create (SongForPlaylist songForPlaylist)
+        public async Task <IActionResult> Create (SongForPlaylist songForPlaylist)
         {
             if (ModelState.IsValid)
             {
                 var collection = songplayservice.GetList();
 
-                foreach(var item in collection)
+                foreach (var item in collection)
                 {
-                    if(songForPlaylist.PlaylistId == item.PlaylistId && songForPlaylist.SongDetailsId == item.SongDetailsId)
+                    if (songForPlaylist.PlaylistId == item.PlaylistId && songForPlaylist.SongDetailsId == item.SongDetailsId)
                     {
                         return RedirectToAction(nameof(error123));
                     }
                 }
 
-                _context.Add(songForPlaylist);
+                _context.Add(songForPlaylist); 
 
                 await _context.SaveChangesAsync();
 

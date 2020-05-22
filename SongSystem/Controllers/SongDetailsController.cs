@@ -17,17 +17,21 @@ namespace SongSystem.Controllers
         private readonly SongSystemContext _context;
         private readonly ISongService SongService;
 
-        public SongDetailsController(ISongService songservice, SongSystemContext context)
+        public SongDetailsController (ISongService songservice, SongSystemContext context)
         {
             _context = context;
             SongService = songservice;
         }
+   
         public IActionResult Index()
         {
             var vm = new SongIndexVm();
             vm.songs = SongService.GetAllSongs();
+
             return View(vm);
         }
+
+   
 
         //public ActionResult Index2()
         //{
@@ -70,21 +74,20 @@ namespace SongSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create (SongDetails aSong)
+        public async Task <IActionResult> Create (SongDetails aSong)
         {
             if (ModelState.IsValid)
             {
-                SongService.addSong(aSong);
+                SongService.addSong (aSong);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction (nameof(Index));
             }
 
-
-            return View(aSong);
+            return View (aSong);
         }
 
         // GET: SongDetails/Edit/5
-        public async Task<IActionResult> Edit (int? id)
+        public async Task <IActionResult> Edit (int? id)
         {
             if (id == null)
             {
@@ -98,7 +101,7 @@ namespace SongSystem.Controllers
                 return NotFound();
             }
 
-            return View(songDetails);
+            return View (songDetails);
         }
 
         // POST: SongDetails/Edit/5
@@ -106,7 +109,7 @@ namespace SongSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, SongDetails songDetails)
+        public async Task <IActionResult> Edit (int id, SongDetails songDetails)
         {
             if (id != songDetails.Id)
             {
@@ -117,28 +120,31 @@ namespace SongSystem.Controllers
             {
                 try
                 {
-                    _context.Update(songDetails);
+                    _context.Update (songDetails);
                     await _context.SaveChangesAsync();
                 }
+
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SongDetailsExists(songDetails.Id))
+                    if (!SongDetailsExists (songDetails.Id))
                     {
                         return NotFound();
                     }
+
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction (nameof(Index));
             }
 
-            return View(songDetails);
+            return View (songDetails);
         }
 
         // GET: SongDetails/Delete/5
-        public async Task<IActionResult> Delete (int? id)
+        public async Task <IActionResult> Delete (int? id)
         {
             if (id == null)
             {
@@ -158,7 +164,7 @@ namespace SongSystem.Controllers
         // POST: SongDetails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed (int id)
         {
             var songDetails = await _context.Songs.FindAsync(id);
             _context.Songs.Remove(songDetails);
@@ -168,7 +174,7 @@ namespace SongSystem.Controllers
 
         private bool SongDetailsExists(int id)
         {
-            return _context.Songs.Any(e => e.Id == id);
+            return _context.Songs.Any (e => e.Id == id);
         }
     }
 }

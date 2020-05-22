@@ -9,34 +9,53 @@ using SongSystem.Controllers;
 using System.Net.Http;
 using SongSystem.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SongsInfrasctructure.Services;
 //using SongSystem.Controllers;
 
 namespace SongTesting
 {
-    
     public class songtest
     {
-        private readonly ISongService _songservice;
-        private readonly ILogger<SongDetailsController> _logger;
-        private readonly SongDetailsController _songcontroller;
-        private readonly HttpClient _client;
-        private readonly SongSystemContext _context;
 
-        
-
-        //public songtest (SongSystemContext context, HttpClient client ,ISongService songservice, SongDetailsController songcontroller, ILogger <SongDetailsController> logger)
-        public songtest ()
+        [Fact]
+        public void Testing_Numberofsongs_Fromstart()
         {
-            //this._songservice = songservice;
-            this._songcontroller = new SongDetailsController(_songservice, _context);
+            //Arrange
+            var context = new TestContext();
+            ISongService songservice = new SongService (context);
+
+            //Act
+            var allsongs = songservice.GetAllSongs();
+            var numberofsongs = allsongs.Count;
+
+            //Assert
+            Assert.Equal (7, numberofsongs);
         }
 
         [Fact]
-
-        public void Index()
+        public void CreateMethod_SongController_NotNull()
         {
-            SongDetailsController sdc = new SongDetailsController(_songservice, _context);
+            //Arrange
+            var context = new TestContext();
+            ISongService songservice = new SongService(context);
+            SongDetailsController songcontroller = new SongDetailsController(songservice, context);
+
+            //Act
+            ViewResult theResult = songcontroller.Create() as ViewResult;
+
+            //Assert
+            Assert.NotNull (theResult);
+
         }
 
+    }
+
+    public class TestContext : SongSystemContext
+    {
+        protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb; Database=SongSystemContext-4e702422-1bb2-41d3-a0ca-1142dad41803; Trusted_Connection=True; MultipleActiveResultSets=true");
+        }
     }
 }

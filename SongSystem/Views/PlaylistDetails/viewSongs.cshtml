@@ -14,7 +14,7 @@
 
 }
 
-<h1> Songs from @foreach (var item in Model.songsforplaylists) { @Html.DisplayFor(modelItem => item.Playlist.Name) break; } </h1>
+<h1> Songs in @foreach (var item in Model.songsforplaylists) { @Html.DisplayFor(modelItem => item.Playlist.Name) break; } </h1>
 
 @*<p>
     <a asp-action="Create">Create New</a>
@@ -29,7 +29,6 @@
             <th>Artist name</th>
             <th>Length</th>
             <th></th>
-
         </tr>
     </thead>
     <tbody>
@@ -58,6 +57,8 @@
         </td>
         </tr>
         }
+
+        
 
         <a asp-action="Index">Back</a>
 

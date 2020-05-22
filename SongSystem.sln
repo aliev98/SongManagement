@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SongsApplication", "SongsAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaylistLength", "PlaylistLength\PlaylistLength.csproj", "{346AA4F6-5074-4DCE-95D9-5A6880E6F403}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongTesting", "SongTesting\SongTesting.csproj", "{2E7424EE-B5FE-470E-B398-9A5B10C8C6A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SongTesting", "SongTesting\SongTesting.csproj", "{2E7424EE-B5FE-470E-B398-9A5B10C8C6A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

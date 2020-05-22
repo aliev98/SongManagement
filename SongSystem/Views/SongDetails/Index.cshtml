@@ -7,10 +7,11 @@
 <h1>Song list</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">New song</a>
 </p>
+
 <table class="table">
-    <thead>
+    <thead style="background-color:aliceblue">
         <tr>
             <th>(Id) Title</th>
             <th>Artist name</th>
@@ -19,12 +20,11 @@
         </tr>
     </thead>
     <tbody>
-
-       @foreach (var item in Model.songs)
-        {
+        @foreach (var item in Model.songs)
+         {
          <tr>
             <td>
-            @Html.Encode($"({item.Id})")    @Html.DisplayFor(modelItem => item.Title )
+               @Html.Encode($"({item.Id})")   @Html.DisplayFor(modelItem => item.Title )
             </td>
 
             <td>
@@ -41,7 +41,7 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-        }
+         }
     </tbody>
 </table>
 

@@ -14,19 +14,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="SongDetailsId" class="control-label"></label>
+                <label asp-for="SongDetailsId" class="control-label">Choose a song</label>
                 <select asp-for="SongDetailsId" class="form-control" asp-items="ViewBag.SongDetailsId"></select>
             </div>
 
             <div class="form-group">
-                <label asp-for="PlaylistId" class="control-label"></label>
+                <label asp-for="PlaylistId" class="control-label">Into which playlist?</label>
                 <select asp-for="PlaylistId" class="form-control" asp-items="ViewBag.PlaylistId"></select>
             </div>
 
-            @if (null != TempData["alertMessage"])
-            {
+             @if (null != TempData["alertMessage"])
+             {
                 <h5 style="color:red"> That song is already in that playlist </h5>
-            }
+             }
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

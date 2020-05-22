@@ -8,6 +8,6 @@ namespace SongSystem.Models
 {
     public class SongsPlaylistsVm
     {
-        public ICollection<SongForPlaylist> songsforplaylists = new List <SongForPlaylist>();
+        public ICollection <SongForPlaylist> songsforplaylists = new List <SongForPlaylist>();
     }
 }
