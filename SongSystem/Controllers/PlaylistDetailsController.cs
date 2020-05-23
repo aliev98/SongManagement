@@ -71,15 +71,17 @@ namespace SongSystem.Controllers
         {
             var playlist = playlistService.GetPlaylist (Id);
             
-            ViewBag.message = playlist.Name;
-            ViewBag.theId = playlist.Id;
+            //ViewBag.message = playlist.Name;
 
+            ViewBag.theId = Id;
+            
             return View();
         }
 
         [HttpGet]
         public IActionResult newSong ()
         {
+            
             return View();
         }
 
@@ -89,15 +91,29 @@ namespace SongSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var thesong = aSong;
+                songService.addSong(aSong);
 
-                songService.addSong(thesong);
+                playlistandsong(aSong.Id );
 
-
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
 
             return View(aSong);
+        }
+
+        public ActionResult playlistandsong (int songId, int playlistId)
+        {
+            var thesong = songService.GetSong(songId);
+            var theplaylist = playlistService.GetPlaylist(playlistId);
+
+            var songplay = new SongForPlaylist();
+            
+            songplay.SongDetailsId = thesong.Id;
+            songplay.PlaylistId = theplaylist.Id;
+
+            songplayservice.addSongPlay(songplay);
+
+            return RedirectToAction("Index");
         }
 
 

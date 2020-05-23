@@ -7,11 +7,29 @@
 <h1>Song list</h1>
 
 <p>
-    <a asp-action="Create">New song</a>
+    <a asp-action="Create" class="btn btn-primary" >New song</a>
 </p>
 
 <table class="table">
     <thead style="background-color:aliceblue">
+
+            @*<form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit">Submit</button>
+
+            <br />
+            <br />
+            </form>*@
+
+        <form method="get" asp-action="Index">
+            <p>
+                <input type="search" placeholder="Enter a keyword..." value="@ViewData["Getemployeedetails"]" name="Empsearch" style="width:300px"/>
+                <input type="submit" value="Search" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-primary"> Reset </a>
+            </p>
+        </form>
+            
+
         <tr>
             <th>(Id) Title</th>
             <th>Artist name</th>

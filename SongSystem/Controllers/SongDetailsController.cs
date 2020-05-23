@@ -22,13 +22,36 @@ namespace SongSystem.Controllers
             _context = context;
             SongService = songservice;
         }
-   
+
         public IActionResult Index()
         {
             var vm = new SongIndexVm();
             vm.songs = SongService.GetAllSongs();
 
             return View(vm);
+        }
+
+        [HttpGet]
+
+        public async Task <IActionResult> Index (string Empsearch)
+        {
+            ViewData["Getemployeedetails"] = Empsearch;
+
+            var empquery = from x in _context.Songs
+                           select x;
+
+            if (!String.IsNullOrEmpty(Empsearch))
+            {
+                empquery = empquery.Where (x => x.Title.Contains(Empsearch) || x.ArtistName.Contains(Empsearch));
+            }
+            
+            var vm = new SongIndexVm();
+            vm.songs = empquery.ToList();
+
+            return View(vm);
+
+            //return View(await empquery.AsNoTracking().ToListAsync());
+
         }
 
    
